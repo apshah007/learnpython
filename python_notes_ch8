@@ -1,0 +1,122 @@
+generally speaking, a user should never see an exception dialog box
+your application should always catch the exception and handle it before the user
+sees it.  catching every potential exception is still the goal when developing
+an application
+
+basic exception handling.
+handling a single exception
+range checking
+
+base classes - the base classes provide the essential building blocks
+for other exceptions.  however you might actually see some of these
+exceptions when working with an application
+
+concrete exceptions - applications can experience hard errors. errors that are
+hard to overcome because there is not really a good way to handle them or they
+signal an event that the application must handle.  for example when a system
+runs out of memory, python generates a MemoryError exception.  recovering from
+this error is hard because it is not always possible to release memory from
+other uses.  when the user presses an interrupt key (like control C or delete)
+python generate a KeyboardInterrupt exception.  The application must handle this
+exception before proceeding with any other tasks.
+
+os exceptions - the operating system can generate errors that python then passes
+along to your application.  for example, if your application tries to open a file
+that does not exist, the operating system generates a FileNotFoundError exceptions
+
+warnings - python tries to warn you about unexpected events or actions that could
+result in errors later.  for example if you try to inapproprately use a resource
+such as an icon, python generates a ResourceWarning exception. You want to
+remember that this particular category is a warning and not an actual error.
+ignoring it can cause you woe later, but you can ignore it.
+
+working with exception arguments
+most exceptions dont provide arguments.  arguments are a list of values that
+you can check for additional information.  the exception either occurs or it
+does not.  however a few exceptions do provide arguments
+the arguments provide details about the exception and can help you correct it
+
+handling multiple exceptions with a single except clause
+most applications can generate multiple exceptions for a single line of code
+how you hadnle the multiple exceptions depends on your goals for the application,
+the types of exceptions, and the relative skill of your users.
+sometimes when working with a less skilled user, its simply easier to say that the
+application experienced a nonrecoverable error and then log the details into a
+log file in the application directory or a central location
+
+handling multiple exceptions with multiple except clauses
+when working with multiple exceptions its usually a good idea to place each
+exception in its own except clause.  this approach allows you to provide custom
+handling for each exception and makes it easier for the user to know precisely
+what went wrong   of course this approach is also more work.
+
+handling more specific to less specific exceptions
+one strategy for handling exceptions is to provide specific except clauses for
+all known exceptions and generic except clauses to handle unknown exceptions
+python evaluates except clauses in the order in which they appear in the source
+code file.  the first clause is examined first.  the second clause is examined
+second.  the following steps help you examine an example that demonstrates the
+importance of using the correct exception order.  in this case, you perform
+tasks that result in math errors.
+
+nested exception handling.
+sometimes you need to place one exception-handling routine withing another in a
+process called nesting.  when you nest exception-handling routines, python tries
+to find an exception handler in the nested level first and then moves to the outer
+layers.  you can nest exception handling routines as deeply as needed to make
+your code safe.
+
+one of the more common reasons to use the dual layer of exception handling code
+is when you want to obtain input from a user and need to place the input code in
+a loop to ensure that you actually get the required information,  the following
+steps demonstrate how this sort of code might work.
+
+raising exceptions
+your application must generate an exception.  this act is called raising or
+throwing an exception
+how to throw an exception
+make steps to create an exception and then handle it immediately.
+
+passing error information to the caller
+python provides exceptionally flexible error handling in that you can pass
+information to the caller (the code that is calling your code)
+no matter which exception you use
+
+of course the caller may not know that the information is available which leads
+to a lot of dicusssion on the topic.  if you are working with someone else's
+code and dont know whether additional information is available, you can
+always obtain a list of exception arguments to find out more
+
+creating and using custom exceptions
+python provides wealth of standard exceptions that you should use whenever
+possible. these exceptions are incredibly flexible and you can even modify
+them as needed to fit specific needs.  sometimes you must create a custom
+exception because none of the standard exceptions will work.   perhaps the
+exception name just does not tell the viewer the purpose that the exception
+serves.  you may need a custom exception for specialized database work or when
+working with a service.
+
+using the finally clause.
+normally you want to handle any exception that occurs in a way that does not
+cause the application to crash.  however sometimes you cant do anything to fix
+the problem and the application is most definitely going to crash.  at this
+pt your goal is to cause the application to crash gracefully which means closing
+files so that the user does not lose data and performing other tasks of that
+nature.  anything you can do to keep damage to data and the system to a minimum
+is an essential part of handling data or a crashing application.
+
+the finally clause is part of the crashing application strategy.  you use this
+clause to perform any required last minute tasks.  normally the finally clause
+is quite short and uses only calls that are likely to succeed without further
+problem.   its essential to close files, log the user off. and perform other
+required tasks and then let the application crash before something terrible happens
+(such as a total system failure)
+
+with this necessity in mind, the following steps show a simple example of using
+the finally clause.
+
+the finally clause code always executes.  it does not matter whether the exception
+happens or not.  the code you place in this block needs to be common code
+that you always want to execute.  for example, when working with a file. you place
+the code to close the file into this block to ensure that the data isnt damaged
+by remaining in memory rather than going to disk
