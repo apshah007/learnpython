@@ -1,0 +1,63 @@
+interacting with packages.
+
+the examples in this book are small - even tiny real world applications contain
+thousands of lines of code, you need to be able to find things in your code
+the answer is to put things in packages.   these are separate code groupings
+called packages.  they are also known as modules.
+commonly used packages that contain source code for generic needs are called
+libraries.
+
+packages are contained in separate files.  to use the package, you must tell
+python to grab the file and read it into the current application. the process of
+obtaining code found in external files is called importing.  you import a
+package or library to use the code it contains.
+
+as part of the initial set up python created a pointer to the general purpose
+libraries that it uses.  that is why you can simply add an import statement with
+the name of the library and python can find it.  however it pays to know how to
+locate the files on disk in case you ever need to update them or you want to add
+your own packages and libraries to the list of files that python can use.
+
+the library code is self contained and well documented. some devs feel that
+they never need to look at the library code.  you might want to look at the
+library code though to ensure that understand how the code works in addition,
+the library code can teach you new programming techniques. that you might not
+otherwise discover.
+
+the one thing that you do need to know is how to obtain annd use the python
+library documentation,
+
+groupings of pieces of like code together is important to make the code
+easier to use, modify, and undertand.  as an application grows, managing the
+code found in a single file becomes harder and harder.
+at some point code becomes impossible to manage because the file has become
+too large for any one to work with.
+
+the term code is used broadly in this particular case.  code groupings can
+include
+classes
+functions
+variables
+runnable code
+
+
+the collections of classes, functions, variables, and runnable code within
+a package is known as attributes.  a package has attributes that you access by
+that attributes name.
+
+runnable code can actually be written in a language other than python.
+its common to find packages that are written in C or C + + instead of python
+
+the reason that some devs use runnable code is to make the python application
+faster, less resource intensive, better able to use a particular platforms
+resources.
+
+runnable code comes with the downside of making your application less portable
+(able to run on other platforms) unless you have runnable code packages for each
+platform that you want to support
+
+in addition dual language applications can be harder to maintain because you
+must have devs that can speak each of the computer languages used in the applications
+
+the most common way to create a package is to define a separate file containing
+the code you want to group separately from the rest of the application.  
